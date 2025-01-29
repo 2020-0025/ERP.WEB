@@ -1,0 +1,24 @@
+﻿<div class="card">
+    <div class="card-header">
+        <div class="title">
+            @($"{Tarea.Nombre} - {Tarea.Fecha?.ToString("dd/MM/yyyy") ?? "N/A"}")
+        </div>
+        <span class="btn btn-danger" @onclick="EliminarTarea">Eliminar</span>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public TareaDto Tarea { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback<int> OnEliminar { get; set; }
+
+    private async Task EliminarTarea()
+    {
+        if (OnEliminar.HasDelegate)
+        {
+            await OnEliminar.InvokeAsync(Tarea.Id);
+        }
+    }
+}
