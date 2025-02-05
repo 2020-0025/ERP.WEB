@@ -1,11 +1,14 @@
+using HolaMundo.Web.Application.Services;
 using HolaMundo.Web.Components;
+using HolaMundo.Web.Infraestructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-
+builder.Services.AddScoped(typeof(IJsonFileService<>), typeof(JsonFileService<>));
+builder.Services.AddScoped<ITareaService, TareaService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
