@@ -1,0 +1,62 @@
+﻿@page "/tareas"
+@rendermode InteractiveServer
+@using HolaMundo.Web.Application.Services
+@inject ITareaService tareaService
+<PageTitle>Tareas</PageTitle>
+<div class="form-group mb-2">
+    <label for="tarea">Nombre de la tarea</label>
+    <input @bind="Tarea.Nombre" type="text" class="form-control" placeholder="Nombre de la tarea" />
+</div>
+<div class="form-group mb-3">
+    <label for="tarea">Fecha</label>
+    <input @bind="Tarea.Fecha" type="date" class="form-control" placeholder="Fecha de la tarea" />
+</div>
+
+<span class="btn btn-primary" @onclick="Agregar">Agregar</span>
+<div class="card mt-3">
+    <div class="card-header">
+        Tareas
+    </div>
+    <div class="card-body">
+        <div class="container">
+            @if (ListaTareas.Any())
+            {
+                @foreach (var t in ListaTareas)
+                {
+                    <TaskViewer Tarea="t" OnEliminar="()=>Eliminar(t.Id)" />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@code
+{
+    public TareaDto Tarea { get; set; } = new();
+    public List<TareaDto> ListaTareas { get; set; } = [];
+    /// <summary>
+    /// Evento que se ejecuta cuando se carga el componente
+    /// </summary>
+    /// <returns></returns>
+    protected override async Task OnInitializedAsync()
+    {
+        ListaTareas = await tareaService.Consultar();
+    }
+    /// <summary>
+    /// Agrega una tarea
+    /// </summary>
+    async void Agregar()
+    {
+        ListaTareas = await tareaService.Guardar(Tarea);
+        StateHasChanged();
+    }
+    /// <summary>
+    /// Elimina una tarea
+    /// </summary>
+    /// <param name="Id"></param>
+    async void Eliminar(int Id)
+    {
+        ListaTareas = await tareaService.Eliminar(Id);
+        StateHasChanged();
+    }
+}
