@@ -14,4 +14,15 @@ public class Cliente
 
     [ForeignKey(nameof(PersonaId))]
     public virtual Persona DatosPersonales { get; set; } = null!;
+
+    public static Cliente Create(
+        string nombre,
+        DateTime? fechaNacimiento,
+        decimal limiteDeCredito)
+    => new()
+    {
+        LimiteDeCredito = limiteDeCredito,
+        DatosPersonales = 
+        Persona.Create(nombre, fechaNacimiento)
+    };
 }

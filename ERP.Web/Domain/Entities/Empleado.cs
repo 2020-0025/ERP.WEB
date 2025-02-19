@@ -14,4 +14,14 @@ public class Empleado
 
     [ForeignKey(nameof(PersonaId))]
     public virtual Persona DatosPersonales { get; set; } = null!;
+    public static Empleado Create(
+        string nombre,
+        DateTime? fechaNacimiento,
+        decimal sueldo)
+    => new()
+    {
+        Sueldo = sueldo,
+        DatosPersonales =
+        Persona.Create(nombre, fechaNacimiento)
+    };
 }
