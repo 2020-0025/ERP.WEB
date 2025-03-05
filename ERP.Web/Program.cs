@@ -1,5 +1,6 @@
 using ERP.Web.Components;
 using ERP.Web.Data;
+using ERP.Web.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,8 @@ builder.Services.AddRazorComponents()
 //Data Services
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+//Agregar el servico para la gestion de los clientes
+builder.Services.AddScoped<IClienteService, ClienteService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
