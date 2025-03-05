@@ -9,9 +9,9 @@ public class AppDbContext : DbContext
     {
 
     }
-    DbSet<Cliente> Clientes { get; set; } = null!;
-    DbSet<Empleado> Empleados { get; set; } = null!;
-    DbSet<Persona> Personas { get; set; } = null!;
+    public DbSet<Cliente> Clientes { get; set; } = null!;
+    public DbSet<Empleado> Empleados { get; set; } = null!;
+    public DbSet<Persona> Personas { get; set; } = null!;
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

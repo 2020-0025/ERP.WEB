@@ -1,5 +1,6 @@
 ﻿@page "/clientes"
 @rendermode InteractiveServer
+@inject IClienteService ClienteService
 <h3>Clientes
     <span @onclick="Agregar" class="btn btn-outline-success">+</span>
 </h3>
@@ -52,7 +53,7 @@ else
                     <th>
                         <div class="btn-group">
                             <span @onclick="()=>Modificar(item.Id)" class="btn btn-warning">Modificar</span>
-                            <span class="btn btn-danger">Eliminar</span>
+                            <span @onclick="()=>Eliminar(item.Id)" class="btn btn-danger">Eliminar</span>
                         </div>
                     </th>
                     <th>@item.Id</th>
@@ -70,6 +71,15 @@ else
     public ClienteDto Request { get; set; } = new();
     public List<ClienteDto> Listado { get; set; } = [];
 
+    protected override async Task OnInitializedAsync()
+    {
+        await Consultar();
+    }
+    private async Task Consultar()
+    {
+        Listado = await ClienteService.Consultar("");
+    }
+
     public bool ShowForm { get; set; } = false;
     private void Toggle() => ShowForm = !ShowForm; 
     private void Clear(){
@@ -80,9 +90,15 @@ else
         Clear();
         Titulo = "Registrar";
     }
-    private void Add(){
-        Listado.Add(Request);
-        Clear();
+    private async Task Add(){
+        var result = Request.Id == 0?
+            await ClienteService.Crear(Request) :
+            await ClienteService.Modificar(Request);
+        if (result)
+        {
+            await Consultar();
+            Clear();
+        }
     }
     private void Modificar(int Id)
     {
@@ -91,5 +107,12 @@ else
         Request = Listado
         .Where(c => c.Id == Id)
         .FirstOrDefault() ?? new();
+    }
+    private async Task Eliminar(int Id){
+        var result = await ClienteService.Eliminar(Id);
+        if (result)
+        {
+            await Consultar();
+        }
     }
 }
