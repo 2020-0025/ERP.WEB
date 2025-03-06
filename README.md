@@ -5,6 +5,10 @@
 En esta guía, se detallará el proceso para implementar funcionalidades CRUD (Crear, Leer, Actualizar y Eliminar) para la entidad `Empleado`. Los pasos seguirán el mismo enfoque utilizado para la entidad `Cliente` en los commits #ef6a7c6 y #4440d0b. Esta guía servirá como evaluación final y debe ser seguida atentamente para completar la tarea.
 Esta construcción deberá ser en base a la rama EFCore, deben realizar un FORK.
 
+Clona tu nuevo repositorio y cambiate a la rama EFCore:
+<img width="323" alt="image" src="https://github.com/user-attachments/assets/921258a6-58f0-4cee-ac51-924bec2ec7dc" />
+
+
 ## Objetivos
 
 - Crear una interfaz y clase de servicio para la entidad `Empleado`.
