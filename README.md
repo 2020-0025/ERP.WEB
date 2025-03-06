@@ -2,7 +2,8 @@
 
 ## Introducción
 
-En esta guía, se detallará el proceso para implementar funcionalidades CRUD (Crear, Leer, Actualizar y Eliminar) para la entidad `Empleado`. Los pasos seguirán el mismo enfoque utilizado para la entidad `Cliente` en los commits ef6a7c6 y 4440d0b. Esta guía servirá como evaluación final y debe ser seguida atentamente para completar la tarea.
+En esta guía, se detallará el proceso para implementar funcionalidades CRUD (Crear, Leer, Actualizar y Eliminar) para la entidad `Empleado`. Los pasos seguirán el mismo enfoque utilizado para la entidad `Cliente` en los commits #ef6a7c6 y #4440d0b. Esta guía servirá como evaluación final y debe ser seguida atentamente para completar la tarea.
+Esta construcción deberá ser en base a la rama EFCore, deben realizar un FORK.
 
 ## Objetivos
 
