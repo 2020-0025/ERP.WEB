@@ -10,7 +10,6 @@ Esta construcción deberá ser en base a la rama EFCore, deben realizar un FORK.
 - Crear una interfaz y clase de servicio para la entidad `Empleado`.
 - Integrar el servicio en la página `Empleados.razor`.
 - Configurar dependencias en el contenedor de servicios.
-- Añadir migraciones y actualizar la base de datos.
 - Modificar el menú de navegación para incluir la gestión de empleados.
 
 ## Pasos
@@ -42,4 +41,4 @@ Abre el archivo de menú de navegación de tu proyecto y añade un enlace para l
 
 ## Conclusión
 
-Siguiendo estos pasos, habrás implementado las funcionalidades CRUD para la entidad `Empleado`, replicando el enfoque utilizado para la entidad `Cliente`. Asegúrate de probar cada funcionalidad y verificar que todo funcione correctamente. Esta guía debe servir como una evaluación final para tus estudiantes.
+Siguiendo estos pasos, habrás implementado las funcionalidades CRUD para la entidad `Empleado`, replicando el enfoque utilizado para la entidad `Cliente`. Asegúrate de probar cada funcionalidad y verificar que todo funcione correctamente. 
