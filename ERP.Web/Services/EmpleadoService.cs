@@ -4,10 +4,17 @@ using ERP.Web.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 namespace ERP.Web.Services
 {
-    public class EmpleadoService
+    public interface IEmpleadoService
+    {
+        Task<List<EmpleadoDto>> Consultar(string filtro);
+        Task<bool> Crear(EmpleadoDto request);
+        Task<bool> Eliminar(int Id);
+        Task<bool> Modificar(EmpleadoDto request);
+    }
+
+    public class EmpleadoService : IEmpleadoService
     {
         private readonly AppDbContext _context;
-
         public EmpleadoService(AppDbContext context)
         {
             _context = context;
@@ -36,6 +43,42 @@ namespace ERP.Web.Services
                 )
                 .ToListAsync();
             return empleados;
+        }
+
+        public async Task<bool> Crear(EmpleadoDto request)
+        {
+            var empleado = Empleado.Create(
+                request.DatosPersonales.Nombre,
+                request.DatosPersonales.FechaDeNacimiento,
+                request.Sueldo
+            );
+            _context.Empleados.Add(empleado);
+            ;
+            return (await _context.SaveChangesAsync()) > 0;
+        }
+
+        public async Task<bool> Modificar(EmpleadoDto request)
+        {
+            //1. Busco el empleado
+            var empleado = await _context.Empleados
+                .Include(c => c.DatosPersonales)
+                .FirstOrDefaultAsync(c => c.Id == request.Id);
+            //2. Modifico el empleado
+            empleado!.DatosPersonales.Nombre = request.DatosPersonales.Nombre;
+            empleado!.DatosPersonales.FechaDeNacimiento = request.DatosPersonales.FechaDeNacimiento;
+            empleado!.Sueldo = request.Sueldo;
+            //Guardo los cambios
+            return (await _context.SaveChangesAsync()) > 0;
+        }
+
+        public async Task<bool> Eliminar(int Id)
+        {
+            var empleado = await _context.Empleados
+                .FirstOrDefaultAsync(c => c.Id == Id);
+
+            _context.Empleados.Remove(empleado!);
+
+            return (await _context.SaveChangesAsync()) > 0;
         }
 
     }

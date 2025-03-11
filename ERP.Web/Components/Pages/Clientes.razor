@@ -1,29 +1,30 @@
 ﻿@page "/clientes"
 @rendermode InteractiveServer
 @inject IClienteService ClienteService
-<h3>Clientes
+<h3>
+    <strong>Clientes</strong>
     <span @onclick="Agregar" class="btn btn-outline-success">+</span>
 </h3>
 @if(ShowForm){
 
-    <div class="card">
+    <div style="color:white; background-color:black" class="card">
         <div class="card-header">@Titulo cliente</div>
         <div class="card-body">
             <div class="mt-1 form-group">
                 <label class="form-label">Nombre</label>
-                <input class="form-control" type="text" @bind="Request.DatosPersonales.Nombre" />
+                <input style="background-color:aliceblue; color:black" class="form-control" type="text" @bind="Request.DatosPersonales.Nombre" />
             </div>
             <div class="row">
                 <div class="col">
                     <div class="mt-1 form-group">
                         <label class="form-label">Fecha de Nacimiento</label>
-                        <input class="form-control" type="date" @bind="Request.DatosPersonales.FechaDeNacimiento" />
+                        <input style="background-color:aliceblue; color:black" class="form-control" type="date" @bind="Request.DatosPersonales.FechaDeNacimiento" />
                     </div>
                 </div>
                 <div class="col">
                     <div class="mt-1 form-group">
                         <label class="form-label">Limite de Crédito</label>
-                        <input class="form-control" type="number" @bind="Request.LimiteDeCredito" />
+                        <input style="background-color:aliceblue; color:black" class="form-control" type="number" @bind="Request.LimiteDeCredito" />
                     </div>
                 </div>
             </div>
@@ -36,7 +37,7 @@
 }
 else
 {
-    <table class="table">
+    <table style="color:white" class="table">
         <thead>
             <tr>
                 <th>...</th>
