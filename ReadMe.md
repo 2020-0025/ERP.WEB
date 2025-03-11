@@ -12,7 +12,7 @@ Para instalar y ejecutar este proyecto localmente, sigue estos pasos:
 Una vez que la aplicación esté en funcionamiento, puedes acceder a ella en tu navegador web en `https://localhost:7165`. La aplicación incluirá las siguientes funcionalidades:
 
 - **Gestión de Clientes**: Añadir, editar y eliminar clientes.
-- **Gestión de Empleados**: Añadir, editar y eliminar productos.
+- **Gestión de Empleados**: Añadir, editar y eliminar empleados.
 
 ## Contribución
 Si deseas contribuir a este proyecto, por favor sigue estos pasos:
