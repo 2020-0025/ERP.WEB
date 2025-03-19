@@ -18,11 +18,12 @@ public class Cliente
     public static Cliente Create(
         string nombre,
         DateTime? fechaNacimiento,
-        decimal limiteDeCredito)
+        decimal limiteDeCredito,
+        int? ciudadId = null)
     => new()
     {
         LimiteDeCredito = limiteDeCredito,
         DatosPersonales = 
-        Persona.Create(nombre, fechaNacimiento)
+        Persona.Create(nombre, fechaNacimiento, ciudadId)
     };
 }

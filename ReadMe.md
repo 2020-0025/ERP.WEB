@@ -32,7 +32,7 @@ Para gestionar las migraciones de Entity Framework Core en la carpeta `Data/Migr
 0. **Instatalar la herramienta de línea de comandos de EF Core**:
 `dotnet tool install --global dotnet-ef`
 1. **Crear una nueva migración**:
-`dotnet ef migrations add NombreDeLaMigracion -o Data/Migrations`
+`dotnet ef migrations add CreandoTablaCiudades -o Data/Migrations`
 2. **Aplicar las migraciones a la base de datos**:
 `dotnet ef database update`
 3. **Eliminar la última migración (si es necesario)**:

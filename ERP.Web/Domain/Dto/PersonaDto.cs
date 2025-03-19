@@ -5,6 +5,8 @@ namespace ERP.Web.Domain.Dto
     public class PersonaDto
     {
         public int Id { get; set; }//No requerir (Generado por la DB)
+        public int? CiudadId { get; set; } = null;
+        public CiudadDto? CiudadDto { get; set; }
         public string Nombre { get; set; } = null!; //Si
         public DateTime? FechaDeNacimiento { get; set; }//Si
     }

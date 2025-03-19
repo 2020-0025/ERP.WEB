@@ -8,15 +8,22 @@ public class Persona
 {
     [Key]
     public int Id { get; set; }
+    public int? CiudadId { get; set; }
     public string Nombre { get; set; } = null!;
     public DateTime? FechaDeNacimiento { get; set; }
+
+    [ForeignKey(nameof(CiudadId))]
+    public virtual Ciudad? Ciudad { get; set; }
+
     public static Persona Create(
         string nombre,
-        DateTime? fechaNacimiento)
+        DateTime? fechaNacimiento,
+        int? ciudadId = null)
         => new()
         {
             Nombre = nombre,
-            FechaDeNacimiento = fechaNacimiento
+            FechaDeNacimiento = fechaNacimiento,
+            CiudadId = ciudadId
         };
 
 

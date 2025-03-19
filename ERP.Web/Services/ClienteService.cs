@@ -25,6 +25,7 @@ public class ClienteService : IClienteService
         var clientes = await
             _context.Clientes
             .Include(c => c.DatosPersonales)
+            .ThenInclude(p => p.Ciudad)
             .Where(c => c.DatosPersonales.Nombre.Contains(filtro))
             .Select(
                 c =>
@@ -37,7 +38,13 @@ public class ClienteService : IClienteService
                     {
                         Id = c.DatosPersonales.Id,
                         Nombre = c.DatosPersonales.Nombre,
-                        FechaDeNacimiento = c.DatosPersonales.FechaDeNacimiento
+                        FechaDeNacimiento = c.DatosPersonales.FechaDeNacimiento,
+                        CiudadId = c.DatosPersonales.CiudadId,
+                        CiudadDto = new CiudadDto()
+                        {
+                            Id = c.DatosPersonales.Ciudad != null? c.DatosPersonales.Ciudad.Id : 0,
+                            Nombre = c.DatosPersonales.Ciudad != null ? c.DatosPersonales.Ciudad.Nombre : "N/D"
+                        }
                     }
                 }
             )
@@ -49,7 +56,8 @@ public class ClienteService : IClienteService
         var cliente = Cliente.Create(
             request.DatosPersonales.Nombre,
             request.DatosPersonales.FechaDeNacimiento,
-            request.LimiteDeCredito
+            request.LimiteDeCredito,
+            request.DatosPersonales.CiudadId
         );
         _context.Clientes.Add(cliente);
         ;
@@ -64,6 +72,7 @@ public class ClienteService : IClienteService
         //2. Modifico el cliente
         cliente!.DatosPersonales.Nombre = request.DatosPersonales.Nombre;
         cliente!.DatosPersonales.FechaDeNacimiento = request.DatosPersonales.FechaDeNacimiento;
+        cliente!.DatosPersonales.CiudadId = request.DatosPersonales.CiudadId;
         cliente!.LimiteDeCredito = request.LimiteDeCredito;
         //Guardo los cambios
         return (await _context.SaveChangesAsync()) > 0;
