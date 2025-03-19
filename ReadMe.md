@@ -12,7 +12,7 @@ Para instalar y ejecutar este proyecto localmente, sigue estos pasos:
 Una vez que la aplicación esté en funcionamiento, puedes acceder a ella en tu navegador web en `https://localhost:7165`. La aplicación incluirá las siguientes funcionalidades:
 
 - **Gestión de Clientes**: Añadir, editar y eliminar clientes.
-- **Gestión de Empleados**: Añadir, editar y eliminar productos.
+- **Gestión de Empleados**: Añadir, editar y eliminar empleados.
 
 ## Contribución
 Si deseas contribuir a este proyecto, por favor sigue estos pasos:
@@ -32,7 +32,7 @@ Para gestionar las migraciones de Entity Framework Core en la carpeta `Data/Migr
 0. **Instatalar la herramienta de línea de comandos de EF Core**:
 `dotnet tool install --global dotnet-ef`
 1. **Crear una nueva migración**:
-`dotnet ef migrations add NombreDeLaMigracion -o Data/Migrations`
+`dotnet ef migrations add CreandoTablaCiudades -o Data/Migrations`
 2. **Aplicar las migraciones a la base de datos**:
 `dotnet ef database update`
 3. **Eliminar la última migración (si es necesario)**:

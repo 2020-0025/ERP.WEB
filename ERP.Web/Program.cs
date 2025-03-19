@@ -13,6 +13,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //Agregar el servico para la gestion de los clientes y de los empleados
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IEmpleadoService, EmpleadoService>();
+builder.Services.AddScoped<ICiudadService, CiudadService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,5 +32,11 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
-
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
+    var seeder = new AppDbContextSeeder(dbContext);
+    seeder.SeedAsync().Wait();
+}
 app.Run();

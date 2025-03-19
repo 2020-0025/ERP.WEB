@@ -1,8 +1,10 @@
 ﻿@page "/clientes"
 @rendermode InteractiveServer
 @inject IClienteService ClienteService
-<h3>
-    <strong>Clientes</strong>
+
+@inject ICiudadService CiudadService
+
+<h3>Clientes
     <span @onclick="Agregar" class="btn btn-outline-success">+</span>
 </h3>
 @if(ShowForm){
@@ -28,6 +30,20 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <div class="form-floating">
+                        <select @bind="Request.DatosPersonales.CiudadId" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                            <option selected disabled>Seleccione una ciudad...</option>
+                            @foreach (var item in CiudadDtos)
+                            {
+                                <option value="@item.Id">@item.Nombre</option>
+                            }
+                        </select>
+                        <label for="floatingSelect">Ciudad</label>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-footer">
             <span @onclick="Add" class="btn btn-success">Aceptar</span>
@@ -45,6 +61,7 @@ else
                 <th>Cliente</th>
                 <th>Fecha de Nacimiento</th>
                 <th>Límite de crédito</th>
+                <th>Ciudad</th>
             </tr>
         </thead>
         <tbody>
@@ -61,6 +78,7 @@ else
                     <th>@item.DatosPersonales.Nombre</th>
                     <th>@(item.DatosPersonales.FechaDeNacimiento?.ToString("dd/MM/yyyy") ?? "N/A")</th>
                     <th>@item.LimiteDeCredito.ToString("N2")</th>
+                    <th>@item.DatosPersonales?.CiudadDto?.Nombre</th>
                 </tr>
             }
         </tbody>
@@ -71,14 +89,20 @@ else
     public string Titulo { get; set; } = "";
     public ClienteDto Request { get; set; } = new();
     public List<ClienteDto> Listado { get; set; } = [];
+    public List<CiudadDto> CiudadDtos { get; set; } = [];
 
     protected override async Task OnInitializedAsync()
     {
         await Consultar();
+        await ConsultarCiudades();
     }
     private async Task Consultar()
     {
         Listado = await ClienteService.Consultar("");
+    }
+    private async Task ConsultarCiudades()
+    {
+        CiudadDtos = await CiudadService.Consultar();
     }
 
     public bool ShowForm { get; set; } = false;
